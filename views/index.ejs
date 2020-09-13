@@ -1,0 +1,41 @@
+<%- include('./partials/head.ejs') %> 
+
+<body>
+  <div id="page">
+    <div class="card-content">
+      <h1>PgAdmin | Node.js</h1>
+    
+      <form method="POST" action="/query">
+        <div class="form-input">
+          <label for="query">Your Query</label>
+          <textarea name="query" id="query" cols="30" rows="5"></textarea>
+        </div>
+
+        <button type="submit" class="btn-query">Enviar</button>
+      </form>
+
+      <!-- Insert the results of the query here -->
+      <% if (renderParam.querySuccess) { %>
+        <table>
+          <tr>
+            <% renderParam.keyList.forEach( key => { %>
+                <th> <%- key %> </th>
+            <% }) %>
+          </tr>
+          <% renderParam.rows.forEach( row => { %>
+            <tr>
+              <% renderParam.keyList.forEach( key => { %>
+                <td> <%- row[key] %> </td>
+              <% }) %>
+            </tr>
+          <% }) %>
+        </table>
+
+      <% } else { %>
+         <p> <%- renderParam.errorMessage %> </p>
+      <% } %> 
+    </div>
+  </div>
+</body>
+
+</html>
